@@ -32,7 +32,7 @@ export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
 const inputWrapper = inputStyles.root
 
 export const AuthForm = () => {
-    
+
   const { control } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(LoginFormSchema),
     mode: "onChange",
@@ -45,7 +45,7 @@ export const AuthForm = () => {
         name="email"
         render={({ field, fieldState }) => (
           <View>
-            <TextInput style={inputWrapper} value={field.value} onChangeText={field.onChange} placeholder="Email" />
+            <TextInput style={[inputWrapper, styles.input]} value={field.value} onChangeText={field.onChange} placeholder="Email" placeholderTextColor={'gray'} />
             <Text style={styles.error}>{fieldState.error?.message ?? " "}</Text>
           </View>
         )}
@@ -55,12 +55,12 @@ export const AuthForm = () => {
         name="password"
         render={({ field, fieldState }) => (
           <View>
-            <TextInput secureTextEntry style={inputWrapper} value={field.value} onChangeText={field.onChange} placeholder="Пароль" />
+            <TextInput secureTextEntry style={[inputWrapper, styles.input]} value={field.value} onChangeText={field.onChange} placeholder="Пароль" placeholderTextColor={'gray'}  />
             <Text style={styles.error}>{fieldState.error?.message ?? " "}</Text>
           </View>
         )}
       />
-      <Link href="/news/list">Вход</Link>
+      <Link href="/news/list" style={styles.link}>Вход</Link>
     </ThemedView>
   );
 };
@@ -79,4 +79,10 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 'auto'
   },
+  input: {
+    color: 'gray',
+  },
+  link: {
+    color: 'orange',
+  }
 });
